@@ -1,0 +1,41 @@
+# Python environment
+.venv/
+env/
+venv/
+ENV/
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Secret / Configuration (ห้ามหลุดเด็ดขาด!)
+.env
+.env.local
+.env.*
+secrets.json
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Conda / Notebooks
+.ipynb_checkpoints
+.conda/
