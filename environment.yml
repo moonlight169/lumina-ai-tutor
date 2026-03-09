@@ -10,8 +10,7 @@ dependencies:
   - websockets
   - python-dotenv
   - pip:
-      - faster-whisper        # สำหรับ STT ที่คุณใช้อยู่
-      - openai               # หรือใช้ google-generativeai ถ้าใช้ Gemini
-      - pyttsx3              # หรือ gTTS ตามที่สะดวก
-      - vtube-studio-python  # (ถ้ามี) หรือใช้ Websockets สื่อสารโดยตรง
-      - setuptools           # เผื่อไว้สำหรับบาง Library ที่ต้องการ build
+      - faster-whisper
+      - openai
+      - pyttsx3
+      - setuptools
