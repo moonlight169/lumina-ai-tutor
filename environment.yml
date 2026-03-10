@@ -1,16 +1,24 @@
 name: edu-buddy-ai
+
 channels:
   - conda-forge
   - defaults
+
 dependencies:
   - python=3.10
-  - pip
   - numpy
   - requests
   - websockets
   - python-dotenv
+  - pip
+
   - pip:
       - faster-whisper
       - openai
       - pyttsx3
-      - setuptools
+      - elevenlabs
+      - google-genai
+      - openai
+      - ollama
+      - soundfile
+      - sounddevice
