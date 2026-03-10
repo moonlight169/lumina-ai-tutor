@@ -16,14 +16,13 @@ class TTSEngine:
 
         self.client = ElevenLabs(api_key=api_key)
 
-        # เสียงผู้หญิงตัวอย่าง
-        self.voice_id = "EXAVITQu4vr4xnSDxMaL"
+        self.voice_id = "hPFsdzkDrdcVx6D467jW"
 
     def speak(self, text: str):
 
         audio_stream = self.client.text_to_speech.convert(
             voice_id=self.voice_id,
-            model_id="eleven_multilingual_v2",
+            model_id="eleven_v3",
             text=text
         )
 
