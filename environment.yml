@@ -9,8 +9,11 @@ dependencies:
   - requests
   - websockets
   - python-dotenv
+  - python-sounddevice
   - pip:
       - faster-whisper
       - openai
       - pyttsx3
       - setuptools
+      - nvidia-cublas-cu12
+      - nvidia-cudnn-cu12
