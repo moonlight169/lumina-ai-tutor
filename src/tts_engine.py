@@ -1,23 +1,29 @@
 import os
-import asyncio
 import sounddevice as sd
 import soundfile as sf
 from elevenlabs.client import ElevenLabs
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
 
 
 class TTSEngine:
 
     def __init__(self):
         api_key = os.getenv("ELEVENLABS_API_KEY")
+        if not api_key:
+            raise ValueError("ELEVENLABS_API_KEY not set")
+
         self.client = ElevenLabs(api_key=api_key)
 
-        self.voice_id = "9yiczo9fQBjWdt2etT7g" # ค่อยมาแก้
+        # เสียงผู้หญิงตัวอย่าง
+        self.voice_id = "EXAVITQu4vr4xnSDxMaL"
 
-    def _speak_blocking(self, text: str):
+    def speak(self, text: str):
 
         audio_stream = self.client.text_to_speech.convert(
             voice_id=self.voice_id,
-            model_id="eleven_v3",
+            model_id="eleven_multilingual_v2",
             text=text
         )
 
@@ -32,13 +38,3 @@ class TTSEngine:
 
         sd.play(data, samplerate)
         sd.wait()
-
-    async def speak(self, text: str):
-
-        loop = asyncio.get_running_loop()
-
-        await loop.run_in_executor(
-            None,
-            self._speak_blocking,
-            text
-        )
