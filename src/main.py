@@ -1,14 +1,34 @@
-from src.tts_engine import TTSEngine
+import asyncio
+from tts_engine import TTSEngine
+from stt_engine import stt
 
+# สร้าง Instance ของ TTS ไว้ข้างนอก
 tts = TTSEngine()
 
-print("TTS พร้อมใช้งาน (พิมพ์ exit เพื่อออก)")
+async def main():
+    print("--- Lumina AI System พร้อมใช้งาน ---")
+    print("(พูดคำว่า 'exit' เพื่อออกจากโปรแกรม)")
 
-while True:
+    while True:
+        # ใช้ await ภายใน async function ได้แล้ว
+        text = await stt()
 
-    text = input("Text: ")
+        if not text:
+            continue
 
-    if text.lower() == "exit":
-        break
+        print(f"คุณพูดว่า: {text}")
 
-    tts.speak(text)
+        if "exit" in text.lower():
+            print("ปิดโปรแกรม...")
+            break
+
+        # เรียกใช้ TTS (เช็กใน tts_engine ว่า speak เป็น async หรือเปล่า)
+        # ถ้าเพื่อนเขียนเป็น async ให้ใส่ await tts.speak(text)
+        tts.speak(text)
+
+if __name__ == "__main__":
+    try:
+        # ใช้ asyncio.run เป็นตัวจุดระเบิดการทำงาน
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        pass
