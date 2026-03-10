@@ -10,8 +10,7 @@ dependencies:
   - requests
   - websockets
   - python-dotenv
-  - pip
-
+  - python-sounddevice
   - pip:
       - faster-whisper
       - openai
@@ -22,3 +21,6 @@ dependencies:
       - ollama
       - soundfile
       - sounddevice
+      - setuptools
+      - nvidia-cublas-cu12
+      - nvidia-cudnn-cu12
