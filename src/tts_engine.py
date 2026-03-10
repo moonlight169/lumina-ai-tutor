@@ -17,7 +17,7 @@ class TTSEngine:
 
         audio_stream = self.client.text_to_speech.convert(
             voice_id=self.voice_id,
-            model_id="eleven_multilingual_v2",
+            model_id="eleven_v3",
             text=text
         )
 
