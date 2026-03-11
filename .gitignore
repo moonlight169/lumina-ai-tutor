@@ -39,3 +39,5 @@ Thumbs.db
 # Conda / Notebooks
 .ipynb_checkpoints
 .conda/
+
+tts_temp.mp3
