@@ -31,4 +31,4 @@ if __name__ == "__main__":
         # ใช้ asyncio.run เป็นตัวจุดระเบิดการทำงาน
         asyncio.run(main())
     except KeyboardInterrupt:
-        pass
+        pass  
