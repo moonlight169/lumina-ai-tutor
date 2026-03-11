@@ -1,47 +1,49 @@
-import os
 import asyncio
-import google.generativeai as genai
-from dotenv import load_dotenv
-
-load_dotenv()
+import requests
+import json
 
 class LLMHandler:
     def __init__(self):
-        # ตั้งค่า API
-        genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+        # ตั้งค่าพื้นฐานสำหรับ Ollama
+        self.url = "http://localhost:11434/api/generate"
+        self.model_name = "gemma3:4b"  # มั่นใจว่าโหลดตัวนี้มาแล้ว
         
-        # 1. ค้นหาโมเดลอัตโนมัติ (ที่คุณรันผ่านเมื่อกี้)
-        available_models = [m.name for m in genai.list_models() 
-                           if 'generateContent' in m.supported_generation_methods]
-        
-        selected_model = ""
-        for target in ['flash', 'pro', 'gemini']:
-            for name in available_models:
-                if target in name.lower():
-                    selected_model = name
-                    break
-            if selected_model: break
-        
-        if not selected_model: selected_model = available_models[0]
-        print(f"✅ Selected Model: {selected_model}")
-        
-        self.model = genai.GenerativeModel(selected_model)
+        # กำหนดบุคลิกของ Lumina
         self.system_prompt = (
             "คุณคือ Lumina AI ผู้ช่วยต้อนรับเสมือนจริงของสถานศึกษา "
-            "ตอบเป็นภาษาไทย สั้น กระชับ เป็นกันเอง และสุภาพ"
+            "ตอบเป็นภาษาไทย สั้น กระชับ เป็นกันเอง และสุภาพ "
+            "ห้ามตอบยาวเกิน 2 ประโยค"
         )
+        print(f"✅ Local Brain Ready: {self.model_name}")
 
-    # ✅ ตรวจสอบชื่อฟังก์ชันนี้ ต้องชื่อ get_response และอยู่ภายใต้ Class
     async def get_response(self, user_input: str):
         try:
-            full_prompt = f"{self.system_prompt}\n\nผู้ใช้งานพูดว่า: {user_input}\nLumina ตอบว่า:"
-            
-            # เรียกใช้งานแบบ Non-blocking
+            # เตรียมข้อมูลส่งให้ Ollama
+            payload = {
+                "model": self.model_name,
+                "prompt": f"{self.system_prompt}\n\nผู้ใช้งานพูดว่า: {user_input}\nLumina ตอบว่า:",
+                "stream": False,
+                "options": {
+                    "temperature": 0.7,
+                    "top_p": 0.9
+                }
+            }
+
+            # เรียกใช้งานแบบ Non-blocking เพื่อไม่ให้ GUI ค้าง
             response = await asyncio.to_thread(
-                self.model.generate_content, full_prompt
+                requests.post, 
+                self.url, 
+                json=payload, 
+                timeout=10
             )
-            
-            return response.text.strip()
+
+            if response.status_code == 200:
+                result = response.json()
+                return result.get('response', '').strip()
+            else:
+                print(f"❌ Ollama Error: Status {response.status_code}")
+                return "ขออภัยค่ะ สมองของฉันขัดข้องเล็กน้อย ลองใหม่อีกครั้งนะคะ"
+
         except Exception as e:
-            print(f"❌ LLM Error inside handler: {e}")
-            return "ขออภัยค่ะ ฉันคิดคำตอบไม่ทัน รบกวนลองใหม่อีกครั้งนะคะ"
+            print(f"❌ Connection Error: {e}")
+            return "ขออภัยค่ะ ฉันเชื่อมต่อกับสมองส่วนกลางไม่ได้ รบกวนตรวจสอบ Ollama นะคะ"

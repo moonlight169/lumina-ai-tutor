@@ -14,7 +14,7 @@ class TTSEngine:
             raise ValueError("ELEVENLABS_API_KEY not set")
 
         self.client = AsyncElevenLabs(api_key=api_key)
-        self.voice_id = "hPFsdzkDrdcVx6D467jW"
+        self.voice_id = "IR9uF8dTekpdRCOUudlM"
         self.temp_file = "tts_temp.mp3"
 
     async def generate_audio(self, text: str):
