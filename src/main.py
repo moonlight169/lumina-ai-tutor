@@ -8,7 +8,7 @@ llm = LLMEngine()
 
 async def main():
     print("Lumina พร้อมแล้วค่ะ! ลองพูดอะไรสักอย่างดูนะคะ")
-    print("(พูดคำว่า 'exit' เพื่อหยุดโปรแกรมนะค่ะ)")
+    print("(พูดคำว่า 'exit' เพื่อหยุดโปรแกรมนะคะ)")
 
     while True:
         try:
@@ -27,7 +27,6 @@ async def main():
 
             print(f"Luminachan><: {answer}")
 
-            # 3) ให้ TTS พูดคำตอบ
             await tts.speak(answer)
 
         except Exception as e:
