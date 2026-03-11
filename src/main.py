@@ -2,6 +2,7 @@ import asyncio
 from tts_engine import TTSEngine
 from stt_engine import stt
 from llm_handler import LLMEngine
+#STT -> LLM -> TTS ค่าหน่วง 4-30 วินาที ขึ้นอยู่กับความยาวของข้อความและความเร็วของโมเดล เปิด Server LLM ก่อนใช้เสมอ   
 
 tts = TTSEngine()
 llm = LLMEngine()
