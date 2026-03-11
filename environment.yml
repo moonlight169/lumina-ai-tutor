@@ -21,6 +21,7 @@ dependencies:
       - ollama
       - soundfile
       - sounddevice
+      - pydub
       - setuptools
       - nvidia-cublas-cu12
       - nvidia-cudnn-cu12
