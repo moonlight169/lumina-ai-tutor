@@ -16,7 +16,7 @@ dependencies:
       - openai
       - pyttsx3
       - elevenlabs
-      - google-genai
+      - google-generativeai
       - openai
       - ollama
       - soundfile
