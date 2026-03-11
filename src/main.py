@@ -1,33 +1,41 @@
 import asyncio
 from tts_engine import TTSEngine
+from stt_engine import stt
 from llm_handler import LLMEngine
 
 tts = TTSEngine()
 llm = LLMEngine()
 
 async def main():
-
-    print("--- Lumina AI พร้อมใช้งาน ---")
-    print("(พิมพ์ exit เพื่อออก)")
+    print("Lumina พร้อมแล้วค่ะ! ลองพูดอะไรสักอย่างดูนะคะ")
+    print("(พูดคำว่า 'exit' เพื่อหยุดโปรแกรมนะค่ะ)")
 
     while True:
+        try:
+            text = await stt()
 
-        text = input("You: ")
+            if not text:
+                continue
 
-        if not text:
-            continue
+            print(f"Say: {text}")
 
-        if "exit" in text.lower():
-            print("ปิดโปรแกรม...")
-            break
+            if "exit" in text.lower():
+                print("Lumina ก็จากกันไปก่อนนะคะ บ๊ายบาย!")
+                break
 
-        answer = await llm.generate(text)
+            answer = await llm.generate(text)
 
-        print("Lumina:", answer)
+            print(f"Luminachan><: {answer}")
 
-        # ไม่ต้อง await
-        tts.speak(answer)
+            # 3) ให้ TTS พูดคำตอบ
+            await tts.speak(answer)
 
+        except Exception as e:
+            print("Error:", e)
+            await asyncio.sleep(1)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("Lumina ก็จากกันไปก่อนนะคะ บ๊ายบาย!")
