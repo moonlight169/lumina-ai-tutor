@@ -22,10 +22,10 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 # --- Constants ---
 SAMPLE_RATE = 16000
-MODEL_SIZE = "medium"  # เลือกขนาดโมเดลที่ต้องการ (tiny, base, small, medium, large-v3)
+MODEL_SIZE = "large"  # เลือกขนาดโมเดลที่ต้องการ (tiny, base, small, medium, large-v3)
 # ตั้งค่าความดังขั้นต่ำ (0.01 - 0.05) และเวลาที่เงียบ (วินาที)
 SILENCE_THRESHOLD = 0.02  # ปรับเพิ่มถ้าเสียงรบกวนในห้องเยอะ
-SILENCE_DURATION = 0.6   # พูดจบแล้วเงียบเกิน 0.6 วินาที จะถือว่าพูดเสร็จ
+SILENCE_DURATION = 0.3   # พูดจบแล้วเงียบเกิน 0.3 วินาที จะถือว่าพูดเสร็จ
 
 # --- Global Model Initialization ---
 print(f"📦 Checking/Downloading model: {MODEL_SIZE}...")
@@ -88,7 +88,8 @@ async def transcribe_audio(audio_data):
             audio_data,
             language="th", 
             vad_filter=True, # ใช้ VAD ภายในของ Whisper ช่วยอีกชั้น
-            beam_size=1
+            beam_size=1,
+            condition_on_previous_text=False
         )
         return "".join([seg.text for seg in segments]).strip()
 
