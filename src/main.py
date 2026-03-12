@@ -23,7 +23,7 @@ async def main():
         print(f"🤖 Lumina: {response_text}")
 
         # 3. พูดและขยับ (TTS + LipSync)
-        await tts.generate_audio(response_text)
+        await tts.generate_gtts(response_text)
         await asyncio.gather(
             tts.play_audio_async(),
             lipsync()

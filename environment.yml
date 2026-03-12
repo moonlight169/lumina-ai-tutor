@@ -12,6 +12,7 @@ dependencies:
   - python-dotenv
   - python-sounddevice
   - pip:
+      - gTTS
       - faster-whisper
       - openai
       - pyttsx3

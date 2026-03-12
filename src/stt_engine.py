@@ -22,7 +22,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 # --- Constants ---
 SAMPLE_RATE = 16000
-MODEL_SIZE = "large-v3"
+MODEL_SIZE = "large"
 # ตั้งค่าความดังขั้นต่ำ (0.01 - 0.05) และเวลาที่เงียบ (วินาที)
 SILENCE_THRESHOLD = 0.02  # ปรับเพิ่มถ้าเสียงรบกวนในห้องเยอะ
 SILENCE_DURATION = 1.2   # พูดจบแล้วเงียบเกิน 1.2 วินาที จะถือว่าพูดเสร็จ
