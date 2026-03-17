@@ -25,7 +25,7 @@ SAMPLE_RATE = 16000
 MODEL_SIZE = "large"  # เลือกขนาดโมเดลที่ต้องการ (tiny, base, small, medium, large-v3)
 # ตั้งค่าความดังขั้นต่ำ (0.01 - 0.05) และเวลาที่เงียบ (วินาที)
 SILENCE_THRESHOLD = 0.02  # ปรับเพิ่มถ้าเสียงรบกวนในห้องเยอะ
-SILENCE_DURATION = 0.3   # พูดจบแล้วเงียบเกิน 0.3 วินาที จะถือว่าพูดเสร็จ
+SILENCE_DURATION = 0.2   # พูดจบแล้วเงียบเกิน 0.2 วินาที จะถือว่าพูดเสร็จ
 
 # --- Global Model Initialization ---
 print(f"📦 Checking/Downloading model: {MODEL_SIZE}...")

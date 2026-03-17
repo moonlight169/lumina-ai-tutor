@@ -38,7 +38,7 @@ async def main():
 
         # 3. สร้างเสียง
         tts_task = asyncio.create_task(
-            tts.generate_gtts(response_text)
+            tts.generate_audio(response_text)
         )
 
         await tts_task
