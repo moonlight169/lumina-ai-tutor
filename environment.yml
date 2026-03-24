@@ -1,9 +1,9 @@
 name: edu-buddy-ai
-
 channels:
   - conda-forge
+  - pytorch
+  - nvidia
   - defaults
-
 dependencies:
   - python=3.10
   - numpy
@@ -11,6 +11,9 @@ dependencies:
   - websockets
   - python-dotenv
   - python-sounddevice
+  - ffmpeg             # เพิ่มเพื่อให้ pydub/soundfile ทำงานได้ลื่น
+  - pytorch            # เพิ่มเพื่อให้มั่นใจว่าใช้ GPU
+  - pytorch-cuda=12.1  # ระบุเวอร์ชันให้ตรงกับ RTX 40 series
   - pip:
       - gTTS
       - faster-whisper
@@ -18,12 +21,11 @@ dependencies:
       - pyttsx3
       - elevenlabs
       - google-generativeai
-      - openai
       - ollama
       - soundfile
-      - sounddevice
       - pydub
       - setuptools
       - nvidia-cublas-cu12
       - nvidia-cudnn-cu12
       - httpx
+      - pyaudio        # เพิ่มเผื่อไว้สำหรับการทำ Live Streaming Audio
